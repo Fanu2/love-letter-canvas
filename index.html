@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For Rosa 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Elegant fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== PAGE BACKGROUND ===== */
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: "Playfair Display", serif;
+
+            background: linear-gradient(
+                -45deg,
+                {{ colors[0] }},
+                {{ colors[1] }},
+                {{ colors[2] }}
+            );
+            background-size: 400% 400%;
+            animation: gradientMove 14s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ===== SINGLE LOVE CANVAS ===== */
+        .canvas {
+            max-width: {{ "850px" if mode == "letter" else "650px" }};
+            padding: 56px 48px;
+            border-radius: 32px;
+            text-align: center;
+            color: #ffffff;
+
+            background: rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(12px);
+
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow:
+                0 0 50px rgba(255, 255, 255, 0.25),
+                inset 0 0 25px rgba(255, 255, 255, 0.18);
+        }
+
+        .message {
+            font-family: {{ "'Playfair Display', serif" if mode == "letter" else "'Great Vibes', cursive" }};
+            font-size: {{ "22px" if mode == "letter" else "36px" }};
+            line-height: 1.6;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            white-space: pre-line;
+        }
+
+        /* ===== CONTROLS ===== */
+        .controls {
+            margin-top: 28px;
+            text-align: center;
+        }
+
+        select,
+        button,
+        textarea {
+            padding: 10px 18px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            margin: 6px;
+            font-family: "Playfair Display", serif;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 90%;
+            max-width: 800px;
+            padding: 14px;
+            resize: vertical;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ===== ONE AND ONLY ONE CANVAS ===== -->
+<div class="canvas">
+    <div class="message">
+        {{ message | default("My love for you is endless, Rosa, my own blood.\n\n— Papa") }}
+    </div>
+</div>
+
+<!-- ===== CONTROLS (OUTSIDE CANVAS) ===== -->
+<div class="controls">
+    <form method="post">
+        <!-- Mode -->
+        <select name="mode">
+            <option value="card" {% if mode == "card" %}selected{% endif %}>Love Card</option>
+            <option value="letter" {% if mode == "letter" %}selected{% endif %}>Love Letter</option>
+        </select>
+
+        <!-- Mood -->
+        <select name="mood">
+            <option value="romantic" {% if mood == "romantic" %}selected{% endif %}>Romantic</option>
+            <option value="sweet" {% if mood == "sweet" %}selected{% endif %}>Sweet</option>
+            <option value="passionate" {% if mood == "passionate" %}selected{% endif %}>Passionate</option>
+            <option value="calm" {% if mood == "calm" %}selected{% endif %}>Calm</option>
+            <option value="warm" {% if mood == "warm" %}selected{% endif %}>Warm</option>
+            <option value="night" {% if mood == "night" %}selected{% endif %}>Night</option>
+            <option value="dreamy" {% if mood == "dreamy" %}selected{% endif %}>Dreamy</option>
+        </select>
+
+        <br>
+
+        <button type="submit">New Message</button>
+
+        <br><br>
+
+        <!-- Love letter input -->
+        <textarea
+            name="custom_message"
+            rows="6"
+            placeholder="Write or paste your love letter here…"
+        ></textarea>
+
+        <br>
+
+        <button type="submit">Use My Text</button>
+    </form>
+</div>
+
+</body>
+</html>
